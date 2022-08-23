@@ -374,6 +374,9 @@ def training_main(args_ai=None,**kwargs):
                     model_ema, checkpoint['model_ema'])
             if 'scaler' in checkpoint:
                 loss_scaler.load_state_dict(checkpoint['scaler'])
+        test_stats = evaluate(data_loader_val, model, device)
+        if str(args.gpu) == "0":
+            xgen_record(args_ai, model.module, round(float(test_stats["acc1"]), 3), checkpoint['epoch'])
     if args.eval:
         test_stats = evaluate(data_loader_val, model, device)
         print(

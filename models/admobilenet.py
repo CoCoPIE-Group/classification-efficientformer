@@ -20,7 +20,7 @@ def _make_divisible(v, divisor=4, min_value=None,scaling_factor=0.9):
     new_v = scaling_factor * v
     new_v = max(min_value, int(new_v + divisor / 2) // divisor * divisor)
     # Make sure that round down does not go down by more than 10%.
-    if new_v < scaling_factor * v:
+    if new_v < 0.9 * v:
         new_v += divisor
     return new_v
 
@@ -212,7 +212,7 @@ if __name__ == '__main__':
 
     x = torch.randn(1, 3, 224, 224)
 
-    model = adaptive_mobilenet_v2('/home/tmp00047/test/meal/model_config/mbv2_base_config.npy',scaling_factor = 0.94)
+    model = adaptive_mobilenet_v2('/home/guanhua/gding/classification-efficientformer/mobilenet_config/mbv2_base_config.npy',scaling_factor = 0.94)
 
     # checkpoint = torch.load('./mbv2-211m/checkpoints/retrain.pth', map_location='cpu')['model']
     #
@@ -224,22 +224,25 @@ if __name__ == '__main__':
 
     print(model)
 
+    checkpoint = torch.load("/home/guanhua/gding/classification-efficientformer/mbnet_192m.pth", map_location='cpu')
+    model.load_state_dict(checkpoint['model'])
+
     model.eval()
 
     # torch.onnx.export(model, x, "mobilenet_192M.onnx", verbose=True)
     # print('onnx exported')
 
 
-    from xgen_tools.profile import _profile
-    from thop import clever_format
-    import copy
-
-    shape = (1, 3, 244, 244)
-    model_copy = copy.deepcopy(model)
-    device = next(model_copy.parameters()).device
-    x = torch.randn(shape).to(device)
-    flops, params = _profile(model_copy, inputs=(x,), verbose=False)
-    flops, params = clever_format([flops, params], "%.3f")
+    # from xgen_tools.profile import _profile
+    # from thop import clever_format
+    # import copy
+    #
+    # shape = (1, 3, 244, 244)
+    # model_copy = copy.deepcopy(model)
+    # device = next(model_copy.parameters()).device
+    # x = torch.randn(shape).to(device)
+    # flops, params = _profile(model_copy, inputs=(x,), verbose=False)
+    # flops, params = clever_format([flops, params], "%.3f")
 
 
     profile = ProfileConv(model)

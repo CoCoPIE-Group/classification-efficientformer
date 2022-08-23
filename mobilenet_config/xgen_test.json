@@ -5,7 +5,7 @@
     "enable_ddp": true,
     "CUDA_VISIBLE_DEVICES":"0,1,2,3",
      "random_seed": 3407,
-    "pretrained_model_path": "/home/guanhua/gding/classification-efficientformer/XGen_workplace/302c01fcfc59e4fc409f9fe291efa78d/4471d1b9-c7ad-45.pth"
+    "pretrained_model_path": null
   },
   "quantization": {
     "qt_aimet": false,
@@ -44,12 +44,12 @@
     "eval_data_path": null,
     "eval_label_path": null,
     "common_train_epochs": 300,
-    "batch_size": 512,
+    "batch_size": 256,
     "model": "adaptive_mobilenet_v2",
     "mobilenet_config_path": "./mobilenet_config/mbv2_base_config.npy",
     "scaling_factor": 0.94,
     "input_size":224,
-
+    "resume": "/home/ubuntu/code/classification-efficientformer/mbnet_192m.pth",
     "teacher_model": "regnety_160",
     "teacher_path": "https://dl.fbaipublicfiles.com/deit/regnety_160-a5fe301d.pth",
     "distillation_type": "hard",

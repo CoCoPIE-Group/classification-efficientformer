@@ -145,7 +145,7 @@ def get_args_parser():
     # Dataset parameters
     parser.add_argument('--data-path', default='./imagenet', type=str,
                         help='dataset path')
-    parser.add_argument('--data-set', default='IMNET', choices=['CIFAR', 'IMNET', 'INAT', 'INAT19'],
+    parser.add_argument('--data-set', default='CUS', choices=['CIFAR', 'IMNET', 'INAT', 'INAT19','CUS'],
                         type=str, help='Image Net dataset path')
     parser.add_argument('--inat-category', default='name',
                         choices=['kingdom', 'phylum', 'class', 'order',
@@ -187,11 +187,12 @@ def training_main(args_ai=None,**kwargs):
     parser = argparse.ArgumentParser(
         'EfficientFormer training and evaluation script', parents=[get_args_parser()])
     args = parser.parse_args()
-    if args.output_dir:
-        Path(args.output_dir).mkdir(parents=True, exist_ok=True)
+
     utils.init_distributed_mode(args)
 
     args, args_ai = xgen_init(args, args_ai, COCOPIE_MAP)
+    if args.output_dir:
+        Path(args.output_dir).mkdir(parents=True, exist_ok=True)
 
     print(args)
 
@@ -421,7 +422,7 @@ def training_main(args_ai=None,**kwargs):
                     'args': args,
                 }, checkpoint_path)
 
-        if epoch % 20 == 19:
+        if epoch % 5 == 4:
             test_stats = evaluate(data_loader_val, model, device)
             print(
                 f"Accuracy of the network on the {len(dataset_val)} test images: {test_stats['acc1']:.1f}%")
@@ -444,8 +445,10 @@ def training_main(args_ai=None,**kwargs):
             with (output_dir / "log.txt").open("a") as f:
                 f.write(json.dumps(log_stats) + "\n")
 
+
     if str(args.gpu)  == "0":
         xgen_record(args_ai, model.module,-1, -1)
+        # print(args_ai['train']['total_nz_parameters'])
         # model_dummy = copy.deepcopy(model.model.module).cpu()
         # xgen_record(args_ai, model_dummy, -1, -1)
         # del model_dummy

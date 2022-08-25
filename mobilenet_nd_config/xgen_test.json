@@ -1,0 +1,8 @@
+{
+  "general": {
+    "CUDA_VISIBLE_DEVICES":"3"
+  },
+  "training_script_args": {
+    "train_data_path": "/home/guanhua/gding/flower/"
+  }
+}

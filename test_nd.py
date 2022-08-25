@@ -65,14 +65,23 @@ if __name__ == '__main__':
     xgen(training_main, run, xgen_config_path=json_path, xgen_mode='compatible_testing')
 
     print('compatible_testing success!')
-    old['origin']['common_train_epochs'] = 1
+
+    old['origin']['common_train_epochs'] = 0
+    old['user_requirements']['latency'] = 30
+    old['user_requirements']['primary_type'] = "latency"
+    old['user_requirements']['primary_range'] = "<=",
+    old['user_requirements']['secondary_type'] = "accuracy",
+    old['user_requirements']['secondary_range'] = "MAX",
+
     with open(old_json_path, 'w') as f:
         json.dump(old, f)
 
     xgen(training_main, run, xgen_config_path=json_path, xgen_mode='customization')
 
+
+
     print('customization training 1 epoch success!')
-    old['origin']['common_train_epochs'] = 0
+
     with open(old_json_path, 'w') as f:
         json.dump(old, f)
 

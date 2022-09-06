@@ -1,0 +1,80 @@
+{
+  "general": {
+    "work_place": null,
+    "tran_scripts_path": null,
+    "enable_ddp": true,
+    "CUDA_VISIBLE_DEVICES":"0,1,2,3",
+     "random_seed": 3407,
+    "pretrained_model_path":"/home/ubuntu/code/classification-efficientformer/XGen_workplace/73e0a04b797025315df463157342d8f3/a4a16712-996c-48.pth"
+  },
+  "quantization": {
+    "qt_aimet": false,
+    "qat": false,
+    "fold_layers": true,
+    "cross_layer_equalization": false,
+    "bias_correction": true,
+    "rounding_mode": "nearest",
+    "num_quant_samples": 1000,
+    "num_bias_correct_samples": 1000,
+    "weight_bw": 8,
+    "act_bw": 8,
+    "quant_scheme": "tf_enhanced",
+    "layers_to_ignore": [],
+    "auto_add_bias": true,
+    "perform_only_empirical_bias_corr": true
+  },
+  "user_requirements": {
+    "accuracy": 80.0,
+    "latency": 30,
+    "margin": 0.1,
+    "primary_type": "latency",
+    "primary_range": "<=",
+    "secondary_type": "accuracy",
+    "secondary_range": ">=",
+    "max_sampling": 10
+  },
+  "compiler": {
+    "input_shape": "(1,3,224,224)",
+    "opset_version": 11,
+     "devices": ["test"]
+  },
+  "training_script_args": {
+    "train_data_path": "/data/imagenet",
+    "train_label_path": null,
+    "eval_data_path": null,
+    "eval_label_path": null,
+    "common_train_epochs": 400,
+    "lr": 0.00066,
+    "weight_decay": 0.001,
+    "mixup": 0.2,
+    "clip_grad": 5,
+    "batch_size": 256,
+    "model": "adaptive_mobilenet_v2",
+    "mobilenet_config_path": "./mobilenet_config/mbv2_base_config.npy",
+    "scaling_factor": 0.94,
+    "input_size":224,
+    "output_dir": "./mobilenet194-tune",
+    "teacher_model": "regnety_160",
+    "teacher_path": "https://dl.fbaipublicfiles.com/deit/regnety_160-a5fe301d.pth",
+    "distillation_type": "hard",
+    "distillation_alpha": 0.5
+
+  },
+    "pruning": {
+    "prune_method": null,
+    "prune_layers": null,
+    "prune_weight_ranking": "intra-layer",
+    "prune_rate": 0,
+    "admm_update_epoch": 5,
+    "admm_rho": 0.001,
+    "admm_lr": 0.01
+  },
+  "scaling": {
+    "searching_variable": "scaling_factor",
+    "searching_range": [
+      0.5,
+      1.5
+    ],
+    "searching_granularity": null
+  }
+}

@@ -42,7 +42,7 @@
     "train_label_path": null,
     "eval_data_path": null,
     "eval_label_path": null,
-    "common_train_epochs": 300,
+    "common_train_epochs": 600,
     "batch_size": 32,
     "model": "adaptive_mobilenet_v2",
     "mobilenet_config_path": "./mobilenet_config/mbv2_base_config.npy",

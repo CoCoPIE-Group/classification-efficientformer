@@ -20,7 +20,8 @@ from co_lib import Co_Lib as CL
 from xgen_tools import xgen_record, xgen_init, xgen_load
 COCOPIE_MAP = {
     'epochs': 'common_train_epochs',
-    'data_path':'train_data_path'
+    'data_path':'train_data_path',
+    'lr':'learning_rate"
 
 }
 

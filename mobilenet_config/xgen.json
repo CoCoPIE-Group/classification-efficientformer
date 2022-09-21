@@ -48,6 +48,7 @@
     "mobilenet_config_path": "./mobilenet_config/mbv2_base_config.npy",
     "scaling_factor": 0.94,
     "input_size":224,
+    "learning_rate":0.001,
 
     "teacher_model": "regnety_160",
     "teacher_path": "https://dl.fbaipublicfiles.com/deit/regnety_160-a5fe301d.pth",

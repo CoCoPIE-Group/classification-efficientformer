@@ -21,7 +21,7 @@ from xgen_tools import xgen_record, xgen_init, xgen_load
 COCOPIE_MAP = {
     'epochs': 'common_train_epochs',
     'data_path':'train_data_path',
-    'lr':'learning_rate"
+    'lr':'learning_rate'
 
 }
 

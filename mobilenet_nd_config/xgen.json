@@ -39,7 +39,7 @@
      "devices": ["test"]
   },
   "training_script_args": {
-    "train_data_path": "/data/classification-multi-model",
+    "train_data_path": "/xgen/data/classification-multi-model",
     "train_label_path": null,
     "eval_data_path": null,
     "eval_label_path": null,

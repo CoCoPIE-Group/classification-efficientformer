@@ -39,7 +39,7 @@
      "devices": ["test"]
   },
   "training_script_args": {
-    "train_data_path": "/data/imagenet",
+    "train_data_path": "/xgen/data/imagenet",
     "train_label_path": null,
     "eval_data_path": null,
     "eval_label_path": null,

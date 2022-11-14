@@ -2,3 +2,5 @@ efficientvit_l3_300d/
 __pycache__
 *.pyc
 .vscode
+
+xgen_scripts.py
